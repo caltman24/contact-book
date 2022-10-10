@@ -17,8 +17,9 @@ newPerson.EmailAddresses.Add(new EmailAddressModel { EmailAddress = "corbyn@corb
 newPerson.PhoneNumbers.Add(new PhoneNumberModel { PhoneNumber = "2603416708" });
 
 CreateContact(newPerson);
+GetContactById("8c87e8b8-e69e-4b34-9529-e5582770b239");
+UpdateContactsFirstName("Corbraino", "8c87e8b8-e69e-4b34-9529-e5582770b239");
 GetAllContacts();
-GetContactById("f1666715-c346-41dc-aca8-068bb67afdf5");
 
 
 Console.WriteLine("Done Processing Mongo");
@@ -28,7 +29,12 @@ Console.ReadLine();
 // Timestamp: 38:45
 void UpdateContactsFirstName(string firstName, string id)
 {
-    throw new NotImplementedException();
+    Guid guid = new(id);
+    var contact = db.LoadRecordById<ContactModel>(tableName, guid);
+    contact.FirstName = firstName;
+    contact.Id = guid;
+
+    db.UpsertRecord(tableName, guid, contact);
 }
 
 void GetAllContacts()
