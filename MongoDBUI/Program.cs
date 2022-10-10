@@ -18,11 +18,18 @@ newPerson.PhoneNumbers.Add(new PhoneNumberModel { PhoneNumber = "2603416708" });
 
 CreateContact(newPerson);
 GetAllContacts();
+GetContactById("f1666715-c346-41dc-aca8-068bb67afdf5");
 
 
 Console.WriteLine("Done Processing Mongo");
 
 Console.ReadLine();
+
+// Timestamp: 38:45
+void UpdateContactsFirstName(string firstName, string id)
+{
+    throw new NotImplementedException();
+}
 
 void GetAllContacts()
 {
@@ -34,10 +41,25 @@ void GetAllContacts()
     });
 }
 
+void GetContactById(string id)
+{
+    Guid guid = new(id);
+    var contact = db.LoadRecordById<ContactModel>(tableName, guid);
+    if (contact is not null)
+    {
+        Console.WriteLine($"Contact {contact.Id}: {contact.FirstName} {contact.LastName}");
+    } else
+    {
+        Console.WriteLine($"No contact found with id of {id}");
+    }
+    
+
+}
+
 void CreateContact(ContactModel contact, string table = tableName)
 {
     db.UpsertRecord(table, contact.Id, contact);
-    Console.WriteLine($"Contact Created: {contact.FirstName} {contact.LastName}");
+    Console.WriteLine($"Contact Created {contact.Id}: {contact.FirstName} {contact.LastName}");
 }
 
 static string GetConnectionString(string connectionStringName = "Default")
