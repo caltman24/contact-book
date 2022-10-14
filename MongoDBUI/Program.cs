@@ -1,8 +1,6 @@
 ﻿using DataAccessLibrary;
 using DataAccessLibrary.Models;
 using Microsoft.Extensions.Configuration;
-using System.Data.Common;
-using System.Runtime.CompilerServices;
 
 MongoDBDataAccess db = new("demo", GetConnectionString());
 const string tableName = "Contacts";

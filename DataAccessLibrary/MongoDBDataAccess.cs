@@ -41,7 +41,7 @@ public class MongoDBDataAccess
 	{
 		var collection = _db.GetCollection<T>(table);
 
-		_ = collection.ReplaceOne(
+		collection.ReplaceOne(
 			new BsonDocument("_id", new BsonBinaryData(id, GuidRepresentation.Standard)),
 			record,
 			new ReplaceOptions { IsUpsert = true });
