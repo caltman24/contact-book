@@ -1,5 +1,6 @@
 ﻿using DataAccessLibrary;
 using DataAccessLibrary.Models;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -23,6 +24,13 @@ namespace SampleAPI.Controllers
         public List<ContactModel> GetAll()
         {
            return _db.LoadRecords<ContactModel>(tableName);
+        }
+
+        [HttpPost]
+        public IActionResult InsertRecord([FromBody] ContactModel contact)
+        {
+            _db.UpsertRecord(tableName, contact.Id, contact);
+            return Ok(contact);
         }
     }
 }
