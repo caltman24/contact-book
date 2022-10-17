@@ -1,6 +1,8 @@
 import { ContactDataResult, IContactModel } from "../@types/contact";
 
-const apiUrl = "https://localhost:7072/api/Contacts";
+const apiUrl = import.meta.env.DEV
+  ? "https://localhost:7072/api/Contacts"
+  : import.meta.env.VITE_BACKEND_URL_PROD;
 
 export const fetchContacts = async () => {
   const res = await fetch(apiUrl);

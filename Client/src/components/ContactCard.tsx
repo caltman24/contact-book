@@ -15,7 +15,7 @@ const ContactCard = ({ contact }: IContactCardProps) => {
         <p>Email Addresses:</p>
         <ul className="contact-emails">
           {contact.emailAddresses.map((c, i) => (
-            <li key={i}>{c.emailAddress}</li>
+            <li key={`${i}+${c.emailAddress}`}>{c.emailAddress}</li>
           ))}
         </ul>
       </div>
@@ -24,7 +24,7 @@ const ContactCard = ({ contact }: IContactCardProps) => {
         <p>Phone Numbers:</p>
         <ul className="contact-phones">
           {contact.phoneNumbers.map((c, i) => (
-            <li key={i}>{c.phoneNumber}</li>
+            <li key={`${i}+${c.phoneNumber}`}>{c.phoneNumber}</li>
           ))}
         </ul>
       </div>
